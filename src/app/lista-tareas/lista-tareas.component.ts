@@ -1,29 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AgregarTareasComponent } from '../agregar-tareas/agregar-tareas.component';
 import { EliminarTareaComponent } from '../eliminar-tarea/eliminar-tarea.component';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-lista-tareas',
   standalone: true,
-  imports: [AgregarTareasComponent, EliminarTareaComponent ],
+  imports: [AgregarTareasComponent, EliminarTareaComponent],
   templateUrl: './lista-tareas.component.html',
-  styleUrl: './lista-tareas.component.css'
+  styleUrl: './lista-tareas.component.css',
 })
 export class ListaTareasComponent {
-//Array
+  //Array
 
-tareas: string[]=[];
+  tareas: string[] = [];
+  //LocalStorage
 
-//contador
-contador: number= 1;
-//propiedad para cambiar el estado de la tarea
-tareaCompletada: boolean[]= Array(this.tareas.length).fill(false);
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    const localStorage = document.defaultView?.localStorage;
+    this.tareas = [];
 
-//Metodo para cambiar estado
-cambiarEstado(index: number){
-this.tareaCompletada[index] =!this.tareaCompletada[index];
- /*  console.log(this.tareaCompletada); */
+    let datos = localStorage?.getItem('tareas');
+    if (datos != null) {
+      let arreglo = JSON.parse(datos);
+      if (arreglo != null) {
+        for(let tarea of arreglo){
+          this.tareas.push(tarea);
+        }
+      
+      }
+    }
+  }
+
+/*   actualizarLocalStorage() {
+    localStorage.setItem('listado', JSON.stringify(this.tareas));
+  } */
+
+  //contador
+  contador: number = 1;
+  //propiedad para cambiar el estado de la tarea
+  tareaCompletada: boolean[] = Array(this.tareas.length).fill(false);
+
+  agregarTarea(nuevaTarea: string){
+    this.tareas.push(nuevaTarea);
+    this.contador++;
+  }
+
+  //Metodo para cambiar estado
+  eliminarTarea(indice: number) {
+    this.tareas.splice(indice, 1);
+    this.tareaCompletada.splice(indice, 1);
+    /*  console.log(this.tareaCompletada); */
+  }
+
+  //Metodo para limpiar los datos y el local storage
+
+ cambiarEstado(indice:number){
+  this.tareaCompletada[indice]=!this.tareaCompletada[indice]
+ }
 }
-}
-
-

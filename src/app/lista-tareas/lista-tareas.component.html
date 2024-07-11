@@ -1,5 +1,5 @@
-<section>
-    <app-agregar-tareas [agregarTareasRecibidas]="tareas"></app-agregar-tareas>
+<section class="center">
+    <app-agregar-tareas style="background-color: aliceblue" [agregarTareasRecibidas]="tareas"></app-agregar-tareas>
 </section>
 <section>
     <table>
@@ -8,23 +8,28 @@
                 <th>No.</th>
                 <th>Tarea</th>
                 <th>Estado</th>
-                <th>Accion</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
             @for(tarea of tareas; track $index){
-                <tr>
-                    <td>{{contador + $index}}
-                    </td>
-                    <td [class.completada]="tareaCompletada[$index]"><span>{{tarea}}</span></td>
-                    <td><button (click)="cambiarEstado($index)">Completada</button></td>
-                    <td>
-                        <app-eliminar-tarea [eliminarTareaRecibida]="tareas" [recibirIndex]="$index"></app-eliminar-tarea>
-                    </td>
-                </tr>
-
+            <tr>
+                <td>{{ contador + $index }}</td>
+                <td [class.completada]="tareaCompletada[$index]">
+                    <span>{{ tarea }}</span>
+                </td>
+                <td>
+                    <button class="estado" (click)="cambiarEstado($index)">
+            @if(tareaCompletada){
+            <p>realizado</p>
+            } @else {pendiente}
+          </button>
+                </td>
+                <td class="dell">
+                    <app-eliminar-tarea [eliminarTareasRecibida]="tareas" [recibirIndex]="$index"></app-eliminar-tarea>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
 </section>
- 

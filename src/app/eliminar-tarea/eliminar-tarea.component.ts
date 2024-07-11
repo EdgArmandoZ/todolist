@@ -1,18 +1,20 @@
 import { Component, Input } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-eliminar-tarea',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './eliminar-tarea.component.html',
   styleUrl: './eliminar-tarea.component.css'
 })
 export class EliminarTareaComponent {
-@Input() eliminarTareaRecibida: string[]=[];
-@Input() recibirIndex: number = -1;
-
-//Metodo para eliminar tarea
-eliminarTarea(index: number){
-  this.eliminarTareaRecibida.splice(index, 1);
-}
+  @Input() eliminarTareasRecibida: string[] = [];
+  @Input() recibirIndex: number = -1;
+  //Metodo para eliminar tareas
+  eliminarTarea(index: number) {
+    // Eliminar el elemento de la lista en tu componente
+    this.eliminarTareasRecibida.splice(index, 1);
+    localStorage.setItem('tareas', JSON.stringify(this.eliminarTareasRecibida));
+  }
 }

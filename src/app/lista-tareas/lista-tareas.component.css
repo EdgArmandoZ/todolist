@@ -1,4 +1,58 @@
-.completada{
-    background-color: green;
+.completada {
+    text-decoration: line-through !important;
+    color: #5eec26;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #676a6d;
     color: white;
-}
+    /* border-radius: 10px; */
+    overflow: hidden;
+    margin-bottom: 20px;
+
+  }
+  
+  th,
+  td {
+    /* padding: 12px 15px; */
+    text-align: center; 
+  }
+  
+  th {
+    background-color: #75777e;
+  }
+  
+
+  
+ 
+  
+  table,
+  th,
+  td {
+    border: 1px solid #8d8d8d;
+  }
+  
+  .dell {
+    text-align: center;
+  }
+  
+  .estado {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #2a2b2e;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    margin: 0 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .estado:hover {
+    cursor: pointer;
+    background-color: #535658;
+  } 

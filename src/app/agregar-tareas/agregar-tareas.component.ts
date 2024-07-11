@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input , Inject} from '@angular/core';
 import { FormsModule} from '@angular/forms';
 
 @Component({
@@ -9,14 +9,24 @@ import { FormsModule} from '@angular/forms';
   styleUrl: './agregar-tareas.component.css'
 })
 export class AgregarTareasComponent {
-@Input() agregarTareasRecibidas: string[]=[];
-//metodo para agregar tareas
-nuevaTarea = "";
+ 
+  @Input() agregarTareasRecibidas: string[] = [];
+  listaTareas: string[] = [];
 
-agregarTarea(){
-  if(this.nuevaTarea.trim() !== ""){
-    this.agregarTareasRecibidas.push(this.nuevaTarea);
-    this.nuevaTarea="";
+  //Metodo para agregar tareas
+  nuevaTarea = '';
+  agregarTarea() {
+    if (this.nuevaTarea.trim() !== '') {
+      this.agregarTareasRecibidas.push(this.nuevaTarea);
+      this.nuevaTarea = '';
+      localStorage.setItem('tareas', JSON.stringify(this.agregarTareasRecibidas));
+    }
   }
-}
-}
+} 
+
+
+
+
+
+
+
